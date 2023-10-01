@@ -1,0 +1,10 @@
+/* main.css */
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.choice {
+    margin-left: 30px;
+}

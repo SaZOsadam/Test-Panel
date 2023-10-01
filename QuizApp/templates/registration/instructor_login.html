@@ -1,0 +1,44 @@
+{% extends 'QuizApp/base.html' %}
+{% block title %}Instructor Login{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div><a href="{% url 'front_page' %}" class="btn btn-secondary mt-3">HOME</a></div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="display-4 mb-4">Instructor Login</h2>
+
+      <!-- Login Form -->
+      <div class="card form-container" >
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="form-group">
+                <label for="{{ field.id_for_label }}" >{{ field.label }}</label>
+
+                {% if field.name == "password" %}
+                  <input type="password" id="{{ field.id_for_label }}" name="{{ field.name }}" class="form-control" value="{{ field.value|default_if_none:'' }}" />
+                {% else %}
+                  <input type="text" id="{{ field.id_for_label }}" name="{{ field.name }}" class="form-control" value="{{ field.value|default_if_none:'' }}" />
+                {% endif %}
+
+                {% if field.help_text %}
+                  <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                  <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Instructor Login</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

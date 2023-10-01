@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}TestPanel{% endblock %}</title>
+        
+        <!-- Consistent Bootstrap Version, using Bootstrap 5 -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+        <!-- Deferring script for early execution without blocking rendering -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    </head>
+   
+    <body data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-primary ">
+            <div class="container-fluid" >
+                <div>
+                    <ul class="navbar-nav nav-underline">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li> 
+                    </ul>
+                </div>
+                <div class="row">
+                    <ul class="navbar-nav nav-underline">
+                        <li>
+                            <div class="col"><h1 class="text-center mt-5">Automated Grading System</h1></div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div>
+                    <ul class="navbar-nav nav-underline">
+                        {% if user.is_authenticated %}
+                        <span class="navbar-text">Logged in as {{user.username}} | </span>
+                        <li class="nav-item">
+                            <!-- Logout with POST method -->
+                            <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link">Logout</button>
+                            </form>
+                        </li> 
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>  
+                        {% endif %} 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+        {% block content %}
+       
+        
+        {% endblock %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="{% static 'js/timer.js' %}"></script>
+        <script src="{% static 'js/switch.js' %}"></script>
+    </body>
+</html>
+

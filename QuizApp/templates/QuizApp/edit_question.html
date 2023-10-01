@@ -1,0 +1,22 @@
+{% extends 'QuizApp/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h2 class="text-center">Edit Question</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ question_form.as_p }}
+            </div>
+            {{ choice_formset.management_form }}
+            {% for form in choice_formset %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-secondary">Save Changes</button>
+        </form>
+        <a href="{% url 'instructor_dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+{% endblock %}

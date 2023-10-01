@@ -1,0 +1,33 @@
+{% extends 'QuizApp/base.html' %}
+{% block title %}Instructor Dashboard{% endblock %}
+
+{% block content %}
+
+  <div class="container mt-5" >
+    <div>
+      <a href="{% url 'logout' %}" class="btn btn-secondary mt-3">Logout</a>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Instructor Dashboard Heading -->
+        <h1 class="display-4 mb-4" >Created by Instructor {{user.username}} | </h1>
+        
+        <!-- Create Quiz Button -->
+        <a href="{% url 'create_quiz' %}" class="btn btn-primary btn-lg mb-4" >Create Quiz</a>
+        
+        <!-- Your Quizzes Heading -->
+        <h1 class="display-5 mb-4" >Your Quizzes</h1>
+        
+        <!-- List of Quizzes -->
+        <ul class="list-group" >
+          {% for quiz in quizzes %}
+            <li class="list-group-item">
+              <a href="{% url 'edit_quiz' quiz.id %}">{{ quiz.name }} </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

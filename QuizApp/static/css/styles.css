@@ -1,0 +1,29 @@
+:root {
+  --bs-primary: #00a76a;      /* Form color and also Button color */
+  --bs-secondary: #38b1c2;    /* Hover color */
+  --bs-primary-fg: #75b9d4;   /* Active color */
+  --bs-success: #006e72;      /* Success color */
+  --bs-background-body: #010408; /* Background color, default is light grey */
+  --bs-text: #ffffff;         /* Text color */
+  --bs-link: #017c6e;         /* Anchor color, default is using success color */
+}
+
+/* If you want to set a global background and text color */
+body {
+  background-color: var(--bs-background-body);
+  color: var(--bs-text);
+}
+
+/* For anchor (<a>) tags */
+a {
+  color: var(--bs-link); 
+}
+
+a:hover {
+  color: var(--bs-text); /* On hover, use the secondary color */
+}
+
+.background-image{
+  align-items: center;
+  display: block;
+}

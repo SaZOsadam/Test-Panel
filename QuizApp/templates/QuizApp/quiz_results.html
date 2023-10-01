@@ -1,0 +1,25 @@
+{% extends 'QuizApp/base.html' %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h1>Your Score: {{ score }}</h1>
+        <h2>Detailed Results:</h2>
+        <ul>
+            {% for detail in details %}
+                <li>
+                    <strong class="results_question">Question:</strong> {{ detail.question }}<br>
+                    <strong class="results_user_answer">Your Answer:</strong> {{ detail.user_answer }}<br>
+                    <strong class="results_correct_answer">Correct Answer:</strong> {{ detail.correct_answer }}<br>
+                    <strong>Status:</strong> 
+                    <span style="color: {% if detail.is_correct %}green{% else %}red{% endif %};">
+                        {{ detail.is_correct|yesno:"Correct,Incorrect" }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+        <button onclick="location.href='/quiz/student_dashboard/'" class="returnToDashboard btn">Return To Dashboard</button>
+        <a href="{% url 'download_pdf' quiz_session %}" class="btn btn-primary">Download Results</a>
+    </div>
+    
+{% endblock %}

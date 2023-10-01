@@ -1,0 +1,56 @@
+{% extends 'QuizApp/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Create Questions for {{ quiz.name }}</h1>
+        
+        <!-- Existing Questions and Choices will be listed here -->
+     
+        <form method="post" id="questionForm" class="questionForm">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ question_form.as_p }}
+            </div>
+            <div id="choices" class="addChoice-text">
+                <!-- Choices will be dynamically added here -->
+            </div>
+            <button type="button" class="btn addChoice" id="addChoice">Add Choice</button>
+            <button type="submit" class="btn save-question">Save Question</button>
+        </form>
+
+        <button class="btn addQuestion" id="addQuestion">Add Another Question</button>
+    </div>
+    <div>
+      <a href="{% url 'instructor_dashboard' %}" class="btn btn-secondary mt-3">Return to 's Dashboard</a>
+    </div>
+    </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const addChoiceButton = document.getElementById("addChoice");
+          const choicesDiv = document.getElementById("choices");
+          let choiceCount = 0;  // Initialize counter
+    
+          addChoiceButton.addEventListener("click", function() {
+            const choiceInput = document.createElement("input");
+            choiceInput.type = "text";
+            choiceInput.name = "choice_text_" + choiceCount;
+            choiceInput.placeholder = "Choice Text";
+    
+            const isCorrectCheckbox = document.createElement("input");
+            isCorrectCheckbox.type = "checkbox";
+            isCorrectCheckbox.name = "is_correct_" + choiceCount;
+    
+            const choiceDiv = document.createElement("div");
+            choiceDiv.appendChild(choiceInput);
+            choiceDiv.appendChild(isCorrectCheckbox);
+            choiceDiv.appendChild(document.createTextNode("Is Correct"));
+    
+            choicesDiv.appendChild(choiceDiv);
+    
+            choiceCount++;  // Increment counter
+          });
+        });
+      </script>
+
+{% endblock %}
