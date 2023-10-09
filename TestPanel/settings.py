@@ -24,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = 'django-insecure-ke_wjab+md-^q)4z1y%kvvuhc+edx53n#ne215^q@opa6p2lq4'
-
+SECRET_KEY = os.eviron.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.eviron.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['osadam-quizapp-8696a2d0246f.herokuapp.com']
+ALLOWED_HOSTS = os.eviron.get("ALLOWED_HOST").split(" ")
+#'osadam-quizapp-8696a2d0246f.herokuapp.com'
 
 AUTH_USER_MODEL = 'QuizApp.CustomUser'
 
@@ -98,6 +98,10 @@ DATABASES = {
     }
 }
 
+database_url = os.eviron.get("DATABASES_URL")
+DATABASES ["default"] = dj_database_url.parse(database_url)
+
+#postgres://automated_grading_feedback_system_osadam_user:v9jGfjQBPfn1mEHflDlQonGPS2rqkrHX@dpg-ckd8p3ciibqc738ta04g-a.oregon-postgres.render.com/automated_grading_feedback_system_osadam
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
